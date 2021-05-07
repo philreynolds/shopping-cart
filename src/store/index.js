@@ -3,15 +3,14 @@ import Vue from 'vue'
 
 Vue.use(Vuex)
 
-new Vuex.Store({
+export default new Vuex.Store({
   state: { //data
     products: []
   },
   mutations: { //setters
-    setProducts () {
-      //update products
+    setProducts (state, products) {
+      state.products = products
     }
-
   },
   getters: { //computed
     productsCount () {
@@ -21,6 +20,7 @@ new Vuex.Store({
   actions: { //methods
     fetchProducts () {
       //make the call
+      //update the state
     }
 
   },
