@@ -22,8 +22,6 @@ export default {
   created () {
     shop.getProducts(products => {
       store.commit('setProducts', products)
-      console.log(products)
-      console.log(store.state.products)
     })
   }
 }
