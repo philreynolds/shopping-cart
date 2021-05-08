@@ -15,7 +15,7 @@ const _products = [
     'inventory': 10 },
   {
     'id': 3,
-    'title': 'Charli XCX - Sucker CD',
+    'title': 'Charlie XCX - Sucker CD',
     'price': 19.99,
     'inventory': 5
   }
