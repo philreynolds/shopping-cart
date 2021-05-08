@@ -51,8 +51,14 @@ export default new Vuex.Store({
     },
     cartTotal (state, getters) {
       return getters.cartProducts.reduce((total, product) => total += total + product.price * product.quantity, 0)
+    },
+    productIsInStock (state, getters) {
+      return (product) => {
+        return product.inventory > 0
+      }
     }
   },
+
   actions: { //methods
     fetchProducts ({commit}) {
       return new Promise((resolve, reject) => {
@@ -62,15 +68,15 @@ export default new Vuex.Store({
         })
       })
     },
-    addProductToCart (context, product) {
-      if (product.inventory > 0) {
-        const cartItem = context.state.cart.find(item => item.id === product.id)
+    addProductToCart ({state, getters, commit}, product) {
+      if (getters.productIsInStock(product)) {
+        const cartItem = state.cart.find(item => item.id === product.id)
         if (!cartItem) {
-          context.commit('pushProductToCart', product.id)
+          commit('pushProductToCart', product.id)
         } else {
-          context.commit('incrementItemQuantity', cartItem)
+          commit('incrementItemQuantity', cartItem)
         }
-      context.commit('decrementItemInventory', product)
+      commit('decrementItemInventory', product)
       }
     },
     checkout ({state, commit}) {
@@ -85,9 +91,6 @@ export default new Vuex.Store({
         }
       )
     }
-  },
-  modules: {
-
   }
 })
 
