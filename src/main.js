@@ -9,6 +9,6 @@ Vue.filter('currency', currency)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  store: store,
+  store,
   render: h => h(App)
 })
